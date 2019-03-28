@@ -15,7 +15,7 @@ get('/register') do
 end
 
 post('/create') do
-    db = SQLite3::Database.new('db/Databasen.db')
+    db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
     result = db.execute("SELECT username FROM users WHERE username=?", params["Username"])
@@ -35,7 +35,7 @@ get('/login') do
 end
 
 post('/login') do
-    db = SQLite3::Database.new('db/Databasen.db')
+    db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
     #hashat_password = BCrypt::Password.create(params["Password"])
     #result = db.execute("SELECT * FROM users WHERE Username = ? AND Password = ?",params["Username"], hashat_password)
@@ -74,7 +74,7 @@ get('/eroexist') do
 end
 
 post('/eroexist') do
-    db = SQLite3::Database.new('db/Databasen.db')
+    db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
     #byebug 
     result = db.execute("SELECT * FROM users WHERE username = ? AND password = ?",params["Username"], params["Password"])
@@ -88,7 +88,7 @@ post('/eroexist') do
 end
 
 post('/error') do
-    db = SQLite3::Database.new('db/Databasen.db')
+    db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
     result = db.execute("SELECT * FROM users WHERE username = ? AND password = ?",params["Username"], params["Password"])
@@ -106,7 +106,7 @@ get('/worm') do
 end
 
 get('/profile') do
-    db = SQLite3::Database.new('db/Databasen.db')
+    db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
     users = db.execute("SELECT * FROM users")
@@ -115,7 +115,7 @@ get('/profile') do
 end
 
 post('/post') do
-    db = SQLite3::Database.new('db/Databasen.db')
+    db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
     
     new_file_name = SecureRandom.uuid
@@ -138,7 +138,7 @@ end
 
 
 get('/posts') do
-    db = SQLite3::Database.new('db/Databasen.db')
+    db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
     result = db.execute("SELECT * FROM posts")
@@ -147,7 +147,7 @@ get('/posts') do
 end
 
 get('/posts/:id') do
-    db = SQLite3::Database.new('db/Databasen.db')
+    db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
     result = db.execute("SELECT * FROM posts WHERE userId=?", [params["id"]])
@@ -164,7 +164,7 @@ end
 #end
 
 post('/alter/:id') do
-    db = SQLite3::Database.new('db/Databasen.db')
+    db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
     
     new_file_name = SecureRandom.uuid
