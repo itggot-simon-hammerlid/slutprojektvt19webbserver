@@ -1,0 +1,14 @@
+main
+
+    form action="/post" method="POST" id="formula" enctype="multipart/form-data"
+        / input name="Title" type="text" placeholder="Title" 
+        input name="Text" type="text" placeholder="Text"
+        input type="file" name="image" accept="image/*" id="image"
+        input type="submit" value="Post"
+
+    div class="Posts"
+        a href="/posts"
+            p all
+        - users.each do |user|
+            a href="/posts/#{user['id']}"
+                p = user["username"]
