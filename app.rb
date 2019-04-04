@@ -152,7 +152,9 @@ get('/posts/:id') do
 
     result = db.execute("SELECT * FROM posts WHERE userId=?", [params["id"]])
 
-    slim(:posts, locals:{users_posts: result})
+    unam = db.execute("Select username FROM users WHERE username=?", [params[""]])
+
+    slim(:posts, locals:{users_posts: result, users_author: result})
 end
 
 #configure do
