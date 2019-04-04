@@ -23,3 +23,4 @@ Följande sidor är planerade att vara med:
 ## 4. Arkitektur (Beskriv filer och mappar)
 Jag har en mapp som heter views, som innehåller alla slim filer. public innehåller min css samt mina bilder. En db fil som innehåller min databas. Jag har en fil som heter functions som innehåller olika ruby filer som innehåller funktioner.
 ## 5. (Databas med ER-diagram)
+https://www.lucidchart.com/invitations/accept/86fae7e4-3a6c-4148-ba01-0c736a9c08d7
