@@ -11,6 +11,7 @@
 #### 4. Redigera profil
 #### 5. Se andras profiler
 #### 6. Lägga upp bilder och text till olika ämnen/taggar
+#### 7. Kunna svara på inlägg
 ## 2. Vyer (sidor)
 ## 3. Funktionalitet (med sekvensdiagram)
 ## 4. Arkitektur (Beskriv filer och mappar)
