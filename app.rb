@@ -3,6 +3,9 @@ require 'slim'
 require 'sqlite3'
 require 'bcrypt'
 
+require_relative "functions/do_tings"
+require_relative "functions/get_tings"
+
 enable :sessions
 
 get('/') do
@@ -35,33 +38,11 @@ get('/login') do
 end
 
 post('/login') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-    #hashat_password = BCrypt::Password.create(params["Password"])
-    #result = db.execute("SELECT * FROM users WHERE Username = ? AND Password = ?",params["Username"], hashat_password)
-    pass = db.execute("SELECT id, password FROM users WHERE username = ?",params["Username"])
-    
-    #p pass.first["password"]
-    #p params["Password"]
-    if pass.length == 0
-        redirect('/error')
-    end
-    
-
-    if BCrypt::Password.new(pass[0]["password"]) == params["Password"]
-        session["user"] = pass[0]['id']
-        # ^sessions
-        redirect('/worm')
-    else
-        redirect('/error')
-    end
-    
-    #if result == []
-    #    redirect('/error')
-    #result.first["Password"] 
-    #else
-    #    redirect('/worm')
-    #end
+if user_id == login(params)
+    session[:user_id] = user_id
+    redirect('/worm')
+else 
+    redirect('/error')
 end
 
 
