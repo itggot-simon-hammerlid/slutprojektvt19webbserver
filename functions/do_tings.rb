@@ -11,7 +11,6 @@ def login(params)
 
         return pass[0]['id']
     else
-
         return false
     end
 end

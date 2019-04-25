@@ -38,11 +38,13 @@ get('/login') do
 end
 
 post('/login') do
-if user_id == login(params)
-    session[:user_id] = user_id
-    redirect('/worm')
-else 
-    redirect('/error')
+    user_id = login(params)
+    if user_id
+        session[:user_id] = user_id
+        redirect('/worm')
+    else 
+        redirect('/error')
+    end
 end
 
 
@@ -105,11 +107,14 @@ post('/post') do
 
     new_file = FileUtils.copy(path, "./public/img/#{new_file_name}")
 
-    db.execute("INSERT INTO posts (content, picture, userId) VALUES (?, ?, ?)",
+    tag = db.execute("SELECT id FROM tags WHERE name=?",[params['text']])[0]
+
+    db.execute("INSERT INTO posts (content, picture, userId, tagId) VALUES (?, ?, ?, ?)",
         [
             params["Text"],
             new_file_name,
-            session['user']
+            session[:user_id],
+            tag
         ]
     )
     # name = db.execute("SELECT username FROM users WHERE id=?" , [session["user"]])
@@ -124,7 +129,10 @@ get('/posts') do
 
     result = db.execute("SELECT * FROM posts")
 
-    slim(:posts, locals:{users_posts: result})
+   # author = db.execute("SELECT username FROM users WHERE username=?", params["Username"])
+
+    slim(:posts, #author,#
+         locals:{users_posts: result})
 end
 
 get('/posts/:id') do
@@ -160,27 +168,30 @@ post('/alter/:id') do
         [
             params["Text"],
             new_file_name,
-            session['user'],
-            (här skall jag skriva id)
+            session[:user_id],
+            params["id"]
         ]
     )
     # name = db.execute("SELECT username FROM users WHERE id=?" , [session["user"]])
     redirect('/profile')
 end
 
-get('/alter') do
-    redirect('/alter')
-end
+# post('/alter') do
+#     redirect(back)
+# end
 
-before do
-end
+#before do
+#end
 
-after do
-end
+#after do
+#end
 
 
-get('/logout') do
+post('/logout') do
     session.clear
     redirect('/')
 end
 
+get('/tag_list') do
+    slim(:tag_list)
+end

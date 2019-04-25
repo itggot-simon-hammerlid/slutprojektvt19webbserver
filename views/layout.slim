@@ -7,18 +7,10 @@ html lang="en"
         link rel="stylesheet" href="/css/main.css"
         title Blogg
     body
-        header
-            div class="Home" 
-                a href="/" Home
-            div class="Login"
-                a href="/login" Login
-            div class="Register"
-                a href="/register" Register
-            div class="Logout" 
-                a href="/logout" Logout
-            div class="Profile"
-                a href="/profile" Profile
+        == slim(:header)
+        == yield
         footer
             div class=""
 
-        ==yield
+
+
