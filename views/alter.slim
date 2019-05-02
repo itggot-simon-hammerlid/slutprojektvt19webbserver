@@ -5,3 +5,6 @@ main
         input name="Text" type="text" placeholder="Text"
         input type="file" name="image" accept="image/*" id="image"
         input type="submit" value="Update"
+
+    /- if session["user_id"] != nil
+    /- if session["user_id"] == params["id"]

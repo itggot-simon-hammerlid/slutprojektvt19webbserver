@@ -107,14 +107,14 @@ post('/post') do
 
     new_file = FileUtils.copy(path, "./public/img/#{new_file_name}")
 
-    tag = db.execute("SELECT id FROM tags WHERE name=?",[params['text']])[0]
+    #tag = db.execute("SELECT id FROM tags WHERE name=?",[params['text']])[0]
 
     db.execute("INSERT INTO posts (content, picture, userId, tagId) VALUES (?, ?, ?, ?)",
         [
             params["Text"],
             new_file_name,
             session[:user_id],
-            tag
+            params["tag"] 
         ]
     )
     # name = db.execute("SELECT username FROM users WHERE id=?" , [session["user"]])
@@ -138,7 +138,7 @@ get('/posts/:id') do
 
     result = db.execute("SELECT * FROM posts WHERE userId=?", [params["id"]])
 
-    unam = db.execute("Select username FROM users WHERE username=?", [params[""])
+    unam = db.execute("Select username FROM users WHERE username=?", [params[""]])
 
     slim(:posts, locals:{users_posts: result, users_author: result})
 end
@@ -159,14 +159,17 @@ post('/alter/:id') do
     temp_file = params["image"]["tempfile"]
     path = File.path(temp_file)
 
+    tag = db.execute("SELECT id FROM tags WHERE name=?",[params['text']])[0]
+
     new_file = FileUtils.copy(path, "./public/img/#{new_file_name}")
 
-    db.execute("REPLACE INTO posts (content, picture, userId, id) VALUES (?, ?, ?, ?)",
+    db.execute("REPLACE INTO posts (content, picture, userId, tagId) VALUES (?, ?, ?, ?)",
         [
             params["Text"],
             new_file_name,
             session[:user_id],
-            params["id"]
+            tag
+            #params["id"]
         ]
     )
     # name = db.execute("SELECT username FROM users WHERE id=?" , [session["user"]])
