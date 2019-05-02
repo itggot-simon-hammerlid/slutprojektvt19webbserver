@@ -45,29 +45,17 @@ get('/eroexist') do
     slim(:erroexist)
 end
 
-post('/eroexist') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-    #byebug 
-    result = db.execute("SELECT * FROM users WHERE username = ? AND password = ?",params["Username"], params["Password"])
-    
-    if result == []
-        redirect('/error')
-        #result.first["Password"] 
-    else
-        redirect('/worm')
-    end
-end
+#post('/erroexist') do
+#    if erroexist(params)
+#        redirect('/error')
+#    else
+#        redirect('/worm')
+#    end
+#end
 
 post('/error') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-
-    result = db.execute("SELECT * FROM users WHERE username = ? AND password = ?",params["Username"], params["Password"])
-    
-    if result == []
+    if error(params)
         redirect('/error')
-        #result.first["Password"] 
     else
         redirect('/worm')
     end
@@ -78,11 +66,7 @@ get('/worm') do
 end
 
 get('/profile') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-
-    users = db.execute("SELECT * FROM users")
-    
+    users = profile()
     slim(:profile, locals:{users: users})
 end
 
@@ -93,21 +77,12 @@ end
 
 
 get('/posts') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-
-    result = db.execute("SELECT * FROM posts")
-
+    result = getpost()
     slim(:posts, locals:{users_posts: result})
 end
 
 get('/posts/:id') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-
-    result = db.execute("SELECT * FROM posts WHERE userId=?", [params["id"]])
-
-    unam = db.execute("Select username FROM users WHERE username=?", [params[""]])
+    unam, result = getpostid(params)
 
     slim(:posts, locals:{users_posts: result, users_author: result})
 end
@@ -140,7 +115,7 @@ end
 
 
 post('/logout') do
-    session.clear
+    logout(session)
     redirect('/')
 end
 

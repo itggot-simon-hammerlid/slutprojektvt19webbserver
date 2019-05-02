@@ -84,3 +84,36 @@ def alter(params, session)
         return true
     end
 end
+
+def error(params)
+    db = SQLite3::Database.new('db/Databasse.db')
+    db.results_as_hash = true
+
+    result = db.execute("SELECT * FROM users WHERE username = ? AND password = ?",params["Username"], params["Password"])
+    
+    if result == []
+        return true
+        #result.first["Password"] 
+    else 
+        return false
+    end
+end
+
+def logout(session)
+    session.clear
+end
+
+# def eroexist(params)
+#     db = SQLite3::Database.new('db/Databasse.db')
+#     db.results_as_hash = true
+#     #byebug 
+#     result = db.execute("SELECT * FROM users WHERE username = ? AND password = ?",params["Username"], params["Password"])
+    
+#     if result == []
+#         redirect('/error')
+#         #result.first["Password"] 
+#     else
+#         redirect('/worm')
+#     end 
+# end
+#inte klar, tror det är sammma som error funktionen
