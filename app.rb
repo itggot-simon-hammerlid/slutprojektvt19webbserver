@@ -120,5 +120,14 @@ post('/logout') do
 end
 
 get('/tag_list') do
-    slim(:tag_list)
+    result = tag_list()
+    slim(:tag_list, locals:{topics: result})
+end
+
+get('//science') do
+    slim(:sciencetag)
+end
+
+get('//math') do
+    slim(:sciencetag)
 end

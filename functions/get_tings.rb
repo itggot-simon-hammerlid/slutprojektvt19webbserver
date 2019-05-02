@@ -24,3 +24,11 @@ def profile()
     users = db.execute("SELECT * FROM users")
     return users
 end
+
+def tag_list()
+    db = SQLite3::Database.new('db/Databasse.db')
+    db.results_as_hash = true
+
+    result = db.execute("SELECT name FROM tags")
+    return result
+end
