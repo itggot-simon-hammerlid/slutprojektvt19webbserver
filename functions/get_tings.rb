@@ -1,4 +1,4 @@
-def getpost()
+def getposts()
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
@@ -6,13 +6,13 @@ def getpost()
     return result
 end
 
-def getpostid(params)
+def getpostsbyuserid(params)
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
     result = db.execute("SELECT * FROM posts WHERE userId=?", [params["id"]])
 
-    unam = db.execute("Select username FROM users WHERE username=?", [params[""]])
+    unam = db.execute("Select username FROM users WHERE id=?", [params["id"]])
 
     return unam, result
 end

@@ -2,6 +2,7 @@ require 'sinatra'
 require 'slim'
 require 'sqlite3'
 require 'bcrypt'
+require 'json'
 
 require_relative "functions/do_tings"
 require_relative "functions/get_tings"
@@ -77,14 +78,13 @@ end
 
 
 get('/posts') do
-    result = getpost()
+    result = getposts()
     slim(:posts, locals:{users_posts: result})
 end
 
 get('/posts/:id') do
-    unam, result = getpostid(params)
-
-    slim(:posts, locals:{users_posts: result, users_author: result})
+    unam, result = getpostsbyuserid(params)
+    slim(:posts, locals:{users_posts: result, users_author: result, users_autor: unam})
 end
 
 #configure do
