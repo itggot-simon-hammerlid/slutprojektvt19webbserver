@@ -18,18 +18,7 @@ get('/register') do
 end
 
 post('/create') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-
-    result = db.execute("SELECT username FROM users WHERE username=?", params["Username"])
-
-    if result.length != 0
-        redirect('/register')
-    end
-    
-    hashat_password = BCrypt::Password.create(params["Password"])
-
-    db.execute("INSERT INTO users (username, password) VALUES (?, ?)", params["Username"], hashat_password)
+    create(params)
     redirect('/')
 end
 
@@ -98,29 +87,9 @@ get('/profile') do
 end
 
 post('/post') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-    
-    new_file_name = SecureRandom.uuid
-    temp_file = params["image"]["tempfile"]
-    path = File.path(temp_file)
-
-    new_file = FileUtils.copy(path, "./public/img/#{new_file_name}")
-
-    #tag = db.execute("SELECT id FROM tags WHERE name=?",[params['text']])[0]
-
-    db.execute("INSERT INTO posts (content, picture, userId, tagId) VALUES (?, ?, ?, ?)",
-        [
-            params["Text"],
-            new_file_name,
-            session[:user_id],
-            params["tag"] 
-        ]
-    )
-    # name = db.execute("SELECT username FROM users WHERE id=?" , [session["user"]])
+    post(params, session)
     redirect('/profile')
 end
-
 
 
 get('/posts') do
@@ -152,28 +121,11 @@ end
 #end
 
 post('/alter/:id') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-    
-    new_file_name = SecureRandom.uuid
-    temp_file = params["image"]["tempfile"]
-    path = File.path(temp_file)
-
-    tag = db.execute("SELECT id FROM tags WHERE name=?",[params['text']])[0]
-
-    new_file = FileUtils.copy(path, "./public/img/#{new_file_name}")
-
-    db.execute("REPLACE INTO posts (content, picture, userId, tagId) VALUES (?, ?, ?, ?)",
-        [
-            params["Text"],
-            new_file_name,
-            session[:user_id],
-            tag
-            #params["id"]
-        ]
-    )
-    # name = db.execute("SELECT username FROM users WHERE id=?" , [session["user"]])
-    redirect('/profile')
+    if alter(params, session)
+        redirect('/profile')
+    else
+        redirect('/login')
+    end
 end
 
 # post('/alter') do
