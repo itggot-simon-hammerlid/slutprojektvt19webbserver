@@ -3,7 +3,7 @@ div class="postor"
     - users_posts.each do |post|
         article
             p = post["content"]
-            p = post["users_autor"]
+            p = post["post_author"]
             p = post["users_author"]  
             img src="/img/#{post['picture']}"
             -if session["user_id"] != nil

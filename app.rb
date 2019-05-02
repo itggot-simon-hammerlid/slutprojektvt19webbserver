@@ -84,7 +84,7 @@ end
 
 get('/posts/:id') do
     unam, result = getpostsbyuserid(params)
-    slim(:posts, locals:{users_posts: result, users_author: result, users_autor: unam})
+    slim(:posts, locals:{users_posts: result, users_author: result, post_author: unam})
 end
 
 #configure do
