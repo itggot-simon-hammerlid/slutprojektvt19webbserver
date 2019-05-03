@@ -124,10 +124,18 @@ get('/tag_list') do
     slim(:tag_list, locals:{topics: result})
 end
 
-get('//science') do
-    slim(:sciencetag)
+get('/tags/science') do
+    db = SQLite3::Database.new('db/Databasse.db')
+    db.results_as_hash = true
+
+    result = db.execute("SELECT * FROM posts WHERE tagId=?", "science")
+    slim(:sciencetag, locals:{content: result})
 end
 
-get('//math') do
-    slim(:sciencetag)
+get('/tags/math') do
+    db = SQLite3::Database.new('db/Databasse.db')
+    db.results_as_hash = true
+
+    result = db.execute("SELECT * FROM posts WHERE tagId=?", "math")
+    slim(:mathtag, locals:{content: result})
 end
