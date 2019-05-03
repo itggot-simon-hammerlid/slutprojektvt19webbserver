@@ -32,3 +32,19 @@ def tag_list()
     result = db.execute("SELECT name FROM tags")
     return result
 end
+
+def mathposts()
+    db = SQLite3::Database.new('db/Databasse.db')
+    db.results_as_hash = true
+
+    result = db.execute("SELECT * FROM posts WHERE tagId=?", "math")   
+    return result
+end
+
+def scienceposts()
+    db = SQLite3::Database.new('db/Databasse.db')
+    db.results_as_hash = true
+
+    result = db.execute("SELECT * FROM posts WHERE tagId=?", "science")
+    return result
+end

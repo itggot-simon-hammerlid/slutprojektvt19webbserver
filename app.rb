@@ -125,17 +125,11 @@ get('/tag_list') do
 end
 
 get('/tags/science') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-
-    result = db.execute("SELECT * FROM posts WHERE tagId=?", "science")
+    result = scienceposts()
     slim(:sciencetag, locals:{content: result})
 end
 
 get('/tags/math') do
-    db = SQLite3::Database.new('db/Databasse.db')
-    db.results_as_hash = true
-
-    result = db.execute("SELECT * FROM posts WHERE tagId=?", "math")
+    result = mathposts()
     slim(:mathtag, locals:{content: result})
 end
