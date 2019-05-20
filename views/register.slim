@@ -1,6 +1,8 @@
 main
 
-    form action="/create" method="POST"
-        input name="Username" type="text" placeholder="Username" 
-        input name="Password" type="Password" placeholder="Password"
+    form action="/create_account" method="POST"
+        - if session[:error]
+            div.error = session[:msg]
+        input name="Username" type="text" placeholder="Username" required=true
+        input name="Password" type="Password" placeholder="Password" required=true
         input type="submit" value="Create"

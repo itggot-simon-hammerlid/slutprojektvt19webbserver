@@ -4,30 +4,31 @@ def login(params)
     pass = db.execute("SELECT id, password FROM users WHERE username = ?",params["Username"])
     
     if pass.length == 0
-        return false
+        return {error: "failed"}
     end
     
     if BCrypt::Password.new(pass[0]["password"]) == params["Password"]
 
-        return pass[0]['id']
+        return {id: pass[0]['id'], success: "Logged in"}
     else
-        return false
+        return {error: "failed"}
     end
 end
 
-def create(params)
+def create_account(params)
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
     result = db.execute("SELECT username FROM users WHERE username=?", params["Username"])
 
     if result.length != 0
-        redirect('/register')
+        return {error: "user already exists"}
     end
     
     hashat_password = BCrypt::Password.create(params["Password"])
 
     db.execute("INSERT INTO users (username, password) VALUES (?, ?)", params["Username"], hashat_password)
+    return {success: "Registered"}
 end
 
 def post(params, session)
@@ -97,10 +98,6 @@ def error(params)
     else 
         return false
     end
-end
-
-def logout(session)
-    session.clear
 end
 
 # def eroexist(params)

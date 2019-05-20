@@ -1,3 +1,5 @@
+# Retrieves all posts
+#
 def getposts()
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
@@ -6,6 +8,8 @@ def getposts()
     return result
 end
 
+#
+#
 def getpostsbyuserid(params)
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
@@ -17,6 +21,8 @@ def getpostsbyuserid(params)
     return unam, result
 end
 
+#
+#
 def profile()
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true

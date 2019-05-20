@@ -22,15 +22,24 @@ get('/register') do
     slim(:register)
 end
 
-# Creates account and redirects to starting page
+# Creates account and redirects to starting page, sends error message if incorrect input
 #
 # @param [String] username, The username
 # @param [String] password, The password
 #
-# @see DoTings#create 
-post('/create') do
-    create(params)
-    redirect('/')
+# @see DoTings#create_account
+post('/create_account') do
+    result = create_account(params)
+    if result[:error]
+        session[:error] = true
+        session[:msg] = result[:error]
+        #session[:user_id] = login(params)
+        
+        redirect back
+    else
+        session[:msg] = result[:success]
+        redirect('/')
+    end
 end
 
 # Display Login Page
@@ -46,11 +55,13 @@ end
 #
 # @see DoTings#login
 post('/login') do
-    user_id = login(params)
-    if user_id
-        session[:user_id] = user_id
+    result = login(params)
+    if result[:success]
+        session[:user_id] = result[:id]
+        session[:msg] = result[:success]
         redirect('/worm')
     else 
+        session[:msg] = result[:error]
         redirect('/error')
     end
 end
@@ -143,6 +154,7 @@ end
 
 # Replaces selected post and redirects to profile page
 #
+# @param [Integer] :id, the user that wants to alter their post
 # @param [String] image, a submitted image
 # @param [String] Text, text submitted to be posted
 # @param [String] tag, the tag name
@@ -165,11 +177,11 @@ end
 #
 # @see DoTings#logout
 post('/logout') do
-    logout(session)
+    session.clear
     redirect('/')
 end
 
-#
+# Display list of tags
 #
 # @see GetTings#tag_list
 get('/tag_list') do
@@ -177,7 +189,7 @@ get('/tag_list') do
     slim(:tag_list, locals:{topics: result})
 end
 
-# 
+# Display posts with the science tag
 #
 # @see GetTings#scienceposts
 get('/tags/science') do
@@ -185,7 +197,7 @@ get('/tags/science') do
     slim(:sciencetag, locals:{content: result})
 end
 
-#
+# Display posts with the math tag
 #
 # @see GetTings#mathposts
 get('/tags/math') do

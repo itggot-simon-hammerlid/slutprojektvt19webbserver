@@ -1,5 +1,7 @@
 main
     div class="theme"
+        - if session[:msg]
+            p = session[:msg]
     div class="inlagg"
         img src="/img/minecraft.jpg" 
         article
