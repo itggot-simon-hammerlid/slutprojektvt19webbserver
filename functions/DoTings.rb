@@ -1,3 +1,17 @@
+# Finds an article
+#
+# @param [Hash] params, form data
+# @option params [String] username, The username
+# @option params [String] password, The password
+#
+# @return [Hash]
+#   * :error [String] whether an error ocurred
+# @return [Hash]
+#   * :id [Integer] The ID of the user 
+#   * :success [String] message displayed if login was successful
+# @return [Hash]
+#   * :error [String] whether an error ocurred
+#
 def login(params)
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
@@ -15,6 +29,17 @@ def login(params)
     end
 end
 
+# Attempts to register user
+#
+# @param [Hash] params, form data
+# @option params [String] username, The username
+# @option params [String] password, The password
+#
+# @return [Hash]
+#   * :error [String] whether an error ocurred
+# @return [Hash]
+#   * :success [String] message sent if register was successful
+#
 def create_account(params)
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
@@ -31,6 +56,8 @@ def create_account(params)
     return {success: "Registered"}
 end
 
+#
+#
 def post(params, session)
     if session[:user_id] == nil
         redirect('/login')
@@ -57,6 +84,14 @@ def post(params, session)
     end
 end
 
+# Attempts to replace a row in the posts table
+#
+# @param 
+#
+# @param [Hash] params, form data
+# @option param [String] content, The text in the blog
+# @option param [String] tag, The tag of the post
+#
 def alter(params, session)
     if session[:user_id] == nil
         return false
@@ -86,6 +121,8 @@ def alter(params, session)
     end
 end
 
+#
+#
 def error(params)
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
@@ -99,18 +136,3 @@ def error(params)
         return false
     end
 end
-
-# def eroexist(params)
-#     db = SQLite3::Database.new('db/Databasse.db')
-#     db.results_as_hash = true
-#     #byebug 
-#     result = db.execute("SELECT * FROM users WHERE username = ? AND password = ?",params["Username"], params["Password"])
-    
-#     if result == []
-#         redirect('/error')
-#         #result.first["Password"] 
-#     else
-#         redirect('/worm')
-#     end 
-# end
-#inte klar, tror det är sammma som error funktionen

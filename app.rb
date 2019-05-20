@@ -72,19 +72,6 @@ get('/error') do
     slim(:error)
 end
 
-# Display Login Page with error message
-#
-get('/eroexist') do
-    slim(:erroexist)
-end
-
-#post('/erroexist') do
-#    if erroexist(params)
-#        redirect('/error')
-#    else
-#        redirect('/worm')
-#    end
-#end
 
 # Redirects to login site with error message if the user tries to login with incorrect credentials
 #
