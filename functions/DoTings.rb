@@ -86,9 +86,10 @@ end
 
 # Attempts to replace a row in the posts table
 #
-# @param 
-#
 # @param [Hash] params, form data
+#
+# @option param [fråga david] image, the image submitted
+#
 # @option param [String] content, The text in the blog
 # @option param [String] tag, The tag of the post
 #
@@ -99,7 +100,7 @@ def alter(params, session)
         db = SQLite3::Database.new('db/Databasse.db')
         db.results_as_hash = true
         
-        new_file_name = SecureRandom.uuid
+        new_file_name = SecureRandom.uuid #en random sträng, x lång, 
         temp_file = params["image"]["tempfile"]
         path = File.path(temp_file)
 
