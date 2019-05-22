@@ -109,8 +109,14 @@ end
 #
 # @see DoTings#post
 post('/post') do
-    post(params, session)
-    redirect('/profile')
+    result = post(params, session)
+    if result[:error] 
+        session[:msg] = result[:error]
+        redirect('/login')
+    else
+        session[:msg] = result[:success]
+        redirect('/profile')
+    end
 end
 
 # Display posts of all users

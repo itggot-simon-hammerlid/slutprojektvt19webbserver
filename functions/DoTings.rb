@@ -60,7 +60,8 @@ end
 #
 def post(params, session)
     if session[:user_id] == nil
-        redirect('/login')
+        return {error: "Not logged in"}
+        #redirect('/login')
     else
         db = SQLite3::Database.new('db/Databasse.db')
         db.results_as_hash = true
@@ -81,6 +82,7 @@ def post(params, session)
                 params["tag"] 
             ]
         )
+        return {success: "Post successful"}
     end
 end
 
@@ -137,3 +139,7 @@ def error(params)
         return false
     end
 end
+
+
+#pasta # db = SQLite3::Database.new('db/Databasse.db')
+# db.results_as_hash = true
