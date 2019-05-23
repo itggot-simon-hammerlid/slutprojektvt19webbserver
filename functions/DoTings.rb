@@ -29,7 +29,7 @@ def login(params)
     end
 end
 
-# Attempts to register user
+# Attempts to create a new user
 #
 # @param [Hash] params, form data
 # @option params [String] username, The username
@@ -56,12 +56,17 @@ def create_account(params)
     return {success: "Registered"}
 end
 
+# Attempts to insert a new row into the posts table
 #
+# @param [Hash] params, form data
+# @option param [Blob] image, the image submitted
+#
+# @option param [String] content, The text in the blog
+# @option param [String] tag, The tag of the post
 #
 def post(params, session)
     if session[:user_id] == nil
         return {error: "Not logged in"}
-        #redirect('/login')
     else
         db = SQLite3::Database.new('db/Databasse.db')
         db.results_as_hash = true
@@ -74,7 +79,7 @@ def post(params, session)
 
         #tag = db.execute("SELECT id FROM tags WHERE name=?",[params['text']])[0]
 
-        db.execute("INSERT INTO posts (content, picture, userId, tagId) VALUES (?, ?, ?, ?)",
+        db.execute("INSERT INTO posts (content, picture, userId, tagName) VALUES (?, ?, ?, ?)",
             [
                 params["Text"],
                 new_file_name,
@@ -90,7 +95,7 @@ end
 #
 # @param [Hash] params, form data
 #
-# @option param [fråga david] image, the image submitted
+# @option param [Blob] image, the image submitted
 #
 # @option param [String] content, The text in the blog
 # @option param [String] tag, The tag of the post
@@ -110,7 +115,7 @@ def alter(params, session)
 
         new_file = FileUtils.copy(path, "./public/img/#{new_file_name}")
 
-        db.execute("REPLACE INTO posts (content, picture, userId, tagId) VALUES (?, ?, ?, ?)",
+        db.execute("REPLACE INTO posts (content, picture, userId, tagName) VALUES (?, ?, ?, ?)",
             [
                 params["Text"],
                 new_file_name,

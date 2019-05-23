@@ -1,3 +1,14 @@
+# 
+#
+#
+def accessed()
+    if session[:user_id] == nil
+        return {error: "Not logged in"}
+    else
+        return {success: "Logged in"}
+    end
+end
+
 # Retrieves all posts
 #
 def getposts()
@@ -31,6 +42,8 @@ def profile()
     return users
 end
 
+#
+#
 def tag_list()
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
@@ -39,6 +52,8 @@ def tag_list()
     return result
 end
 
+#
+#
 def mathposts()
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
@@ -47,6 +62,8 @@ def mathposts()
     return result
 end
 
+#
+#
 def scienceposts()
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true

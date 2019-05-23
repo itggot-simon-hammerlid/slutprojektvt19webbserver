@@ -1,4 +1,6 @@
 main
+    - if session[:msg]
+        p = session[:msg]
     h1 Hello
 
     form action="/login" method="POST"

@@ -59,7 +59,7 @@ post('/login') do
     if result[:success]
         session[:user_id] = result[:id]
         session[:msg] = result[:success]
-        redirect('/worm')
+        redirect('/accessed')
     else 
         session[:msg] = result[:error]
         redirect('/error')
@@ -83,14 +83,21 @@ post('/error') do
     if error(params)
         redirect('/error')
     else
-        redirect('/worm')
+        redirect('/accessed')
     end
 end
 
 # Display Logged-in Page
 #
-get('/worm') do
-    slim(:worm)
+get('/accessed') do
+    result = accessed()
+    if result[:error] 
+        session[:msg] = result[:error]
+        redirect('/login')
+    else
+        session[:msg] = result[:success]
+        slim(:accessed)
+    end
 end
 
 # Display Profile Page
