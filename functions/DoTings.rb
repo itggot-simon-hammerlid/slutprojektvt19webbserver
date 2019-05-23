@@ -101,12 +101,16 @@ module Model
 
     # Attempts to replace a row in the posts table
     #
+    # @return [Boolean]
+    #
     # @param [Hash] params, form data
     #
     # @option param [Blob] image, the image submitted
     #
     # @option param [String] content, The text in the blog
     # @option param [String] tag, The tag of the post
+    #
+    # @return [Boolean]
     #
     def alter(params, session)
         if session[:user_id] == nil
@@ -139,6 +143,9 @@ module Model
 
     #
     #
+    # @return [Boolean]
+    #
+    # @return [Boolean]
     def error(params)
         db = SQLite3::Database.new('db/Databasse.db')
         db.results_as_hash = true
@@ -152,9 +159,5 @@ module Model
             return false
         end
     end
-
-
-    #pasta # db = SQLite3::Database.new('db/Databasse.db')
-    # db.results_as_hash = true
 end
 

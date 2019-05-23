@@ -49,10 +49,19 @@ get('/login') do
     slim(:login)
 end
 
-# Checks if account exists and logs into account
+# Finds an article
 #
-# @param [String] username, The username
-# @param [String] password, The password
+# @param [Hash] params, form data
+# @option params [String] username, The username
+# @option params [String] password, The password
+#
+# @return [Hash]
+#   * :error [String] whether an error ocurred
+# @return [Hash]
+#   * :id [Integer] The ID of the user 
+#   * :success [String] message displayed if login was successful
+# @return [Hash]
+#   * :error [String] whether an error ocurred
 #
 # @see Model#login
 post('/login') do
@@ -88,7 +97,13 @@ post('/error') do
     end
 end
 
-# Display Logged-in Page
+# Checks if visitor is logged in and displays logged in page
+# 
+# @return [Hash]
+#   * :error [String] if user is not logged in
+#
+# @return [Hash]
+#   * :success [String] if user is logged in
 #
 get('/accessed') do
     result = accessed()
@@ -109,11 +124,20 @@ get('/profile') do
     slim(:profile, locals:{users: users})
 end
 
-# Creates a new post and redirects to profile page
+# Attempts to insert a new row into the posts table
 #
-# @param [String] image, a submitted image
-# @param [String] Text, text submitted to be posted
-# @param [String] tag, the tag name
+# @param [Hash] params, form data
+# 
+# @return [Hash]
+#   * :error [String] whether an error ocurred
+#
+# @option param [Blob] image, the image submitted
+#
+# @option param [String] content, The text in the blog
+# @option param [String] tag, The tag of the post
+#
+# @return [Hash]
+#   * :success [String] message sent if post was successful
 #
 # @see Model#post
 post('/post') do
@@ -137,7 +161,9 @@ end
 
 # Display posts of user chosen
 #
-# @param [Integer] id, The user_id of the chosen account
+# @param [Hash] params, form data
+#
+# @option params [Integer] id, The user_id of the chosen account
 #
 # @see Model#getpostsbyuserid
 get('/posts/:id') do
@@ -145,20 +171,14 @@ get('/posts/:id') do
     slim(:posts, locals:{users_posts: result, users_author: result, post_author: unam})
 end
 
-#configure do
-#    set :error_messages, {
-#        login_failed: "Login failed!!!"
-#       ... etc
-#    }
-#    settings.error[:login_failed]
-#end
-
-# Replaces selected post and redirects to profile page
+# Attempts to replace a row in the posts table
 #
-# @param [Integer] :id, the user that wants to alter their post
-# @param [String] image, a submitted image
-# @param [String] Text, text submitted to be posted
-# @param [String] tag, the tag name
+# @param [Hash] params, form data
+#
+# @option param [Blob] image, the image submitted
+#
+# @option param [String] content, The text in the blog
+# @option param [String] tag, The tag of the post
 #
 # @see Model#alter
 post('/alter/:id') do

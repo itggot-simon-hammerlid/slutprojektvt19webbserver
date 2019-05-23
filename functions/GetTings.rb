@@ -1,5 +1,10 @@
+# Checks if visitor is logged in
 # 
+# @return [Hash]
+#   * :error [String] if user is not logged in
 #
+# @return [Hash]
+#   * :success [String] if user is logged in
 #
 def accessed()
     if session[:user_id] == nil
@@ -11,6 +16,8 @@ end
 
 # Retrieves all posts
 #
+# @return [Array] containing the data of all posts
+#
 def getposts()
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
@@ -19,7 +26,14 @@ def getposts()
     return result
 end
 
+# Display posts of user chosen
 #
+# @param [Hash] params, form data
+#
+# @option params [Integer] id, The user_id of the chosen account
+#
+# @return [Array] containing the data of all posts from a specific user
+# @return [Array] containing the username from a specific user
 #
 def getpostsbyuserid(params)
     db = SQLite3::Database.new('db/Databasse.db')
@@ -32,7 +46,9 @@ def getpostsbyuserid(params)
     return unam, result
 end
 
+# Retrieves all users
 #
+# @return [Array] containing the data of all users
 #
 def profile()
     db = SQLite3::Database.new('db/Databasse.db')
@@ -42,7 +58,9 @@ def profile()
     return users
 end
 
+# Retrieves all tag names
 #
+# @return [Array] containing the data of all tag names
 #
 def tag_list()
     db = SQLite3::Database.new('db/Databasse.db')
@@ -52,7 +70,9 @@ def tag_list()
     return result
 end
 
+# Retrieves all posts with the math tag
 #
+# @return [Array] containing the data of all posts for posts with math tag
 #
 def mathposts()
     db = SQLite3::Database.new('db/Databasse.db')
@@ -62,7 +82,9 @@ def mathposts()
     return result
 end
 
+# Retrieves all posts with the science tag
 #
+# @return [Array] containing the data of all posts for posts with science tag
 #
 def scienceposts()
     db = SQLite3::Database.new('db/Databasse.db')
