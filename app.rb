@@ -8,6 +8,7 @@ require_relative "functions/DoTings"
 require_relative "functions/GetTings"
 
 enable :sessions
+include Model
 
 # Display Starting Page
 #
@@ -27,7 +28,7 @@ end
 # @param [String] username, The username
 # @param [String] password, The password
 #
-# @see DoTings#create_account
+# @see Model#create_account
 post('/create_account') do
     result = create_account(params)
     if result[:error]
@@ -53,7 +54,7 @@ end
 # @param [String] username, The username
 # @param [String] password, The password
 #
-# @see DoTings#login
+# @see Model#login
 post('/login') do
     result = login(params)
     if result[:success]
@@ -78,7 +79,7 @@ end
 # @param [String] username, The username
 # @param [String] password, The password
 #
-# @see DoTings#error
+# @see Model#error
 post('/error') do
     if error(params)
         redirect('/error')
@@ -102,7 +103,7 @@ end
 
 # Display Profile Page
 #
-# @see GetTings#profile
+# @see Model#profile
 get('/profile') do
     users = profile()
     slim(:profile, locals:{users: users})
@@ -114,7 +115,7 @@ end
 # @param [String] Text, text submitted to be posted
 # @param [String] tag, the tag name
 #
-# @see DoTings#post
+# @see Model#post
 post('/post') do
     result = post(params, session)
     if result[:error] 
@@ -138,7 +139,7 @@ end
 #
 # @param [Integer] id, The user_id of the chosen account
 #
-# @see GetTings#getpostsbyuserid
+# @see Model#getpostsbyuserid
 get('/posts/:id') do
     unam, result = getpostsbyuserid(params)
     slim(:posts, locals:{users_posts: result, users_author: result, post_author: unam})
@@ -159,7 +160,7 @@ end
 # @param [String] Text, text submitted to be posted
 # @param [String] tag, the tag name
 #
-# @see DoTings#alter
+# @see Model#alter
 post('/alter/:id') do
     if alter(params, session)
         redirect('/profile')
@@ -175,7 +176,7 @@ end
 
 # Logs out of account and redirects to starting page
 #
-# @see DoTings#logout
+# @see Model#logout
 post('/logout') do
     session.clear
     redirect('/')
@@ -183,7 +184,7 @@ end
 
 # Display list of tags
 #
-# @see GetTings#tag_list
+# @see Model#tag_list
 get('/tag_list') do
     result = tag_list()
     slim(:tag_list, locals:{topics: result})
@@ -191,7 +192,7 @@ end
 
 # Display posts with the science tag
 #
-# @see GetTings#scienceposts
+# @see Model#scienceposts
 get('/tags/science') do
     result = scienceposts()
     slim(:sciencetag, locals:{content: result})
@@ -199,7 +200,7 @@ end
 
 # Display posts with the math tag
 #
-# @see GetTings#mathposts
+# @see Model#mathposts
 get('/tags/math') do
     result = mathposts()
     slim(:mathtag, locals:{content: result})
