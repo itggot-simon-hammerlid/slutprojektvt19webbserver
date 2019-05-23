@@ -59,10 +59,17 @@ end
 # Attempts to insert a new row into the posts table
 #
 # @param [Hash] params, form data
+# 
+# @return [Hash]
+#   * :error [String] whether an error ocurred
+#
 # @option param [Blob] image, the image submitted
 #
 # @option param [String] content, The text in the blog
 # @option param [String] tag, The tag of the post
+#
+# @return [Hash]
+#   * :success [String] message sent if post was successful
 #
 def post(params, session)
     if session[:user_id] == nil
