@@ -61,14 +61,13 @@ module Model
     #
     # @param [Hash] params, form data
     # 
+    # @option params [Blob] image, the image submitted
+    #
+    # @option params [String] content, The text in the blog
+    # @option params [String] tag, The tag of the post
+    #
     # @return [Hash]
     #   * :error [String] whether an error ocurred
-    #
-    # @option param [Blob] image, the image submitted
-    #
-    # @option param [String] content, The text in the blog
-    # @option param [String] tag, The tag of the post
-    #
     # @return [Hash]
     #   * :success [String] message sent if post was successful
     #
@@ -101,17 +100,13 @@ module Model
 
     # Attempts to replace a row in the posts table
     #
-    # @return [Boolean]
-    #
     # @param [Hash] params, form data
+    # @option params [Blob] image, the image submitted
+    # @option params [String] content, The text in the blog
+    # @option params [String] tag, The tag of the post
     #
-    # @option param [Blob] image, the image submitted
-    #
-    # @option param [String] content, The text in the blog
-    # @option param [String] tag, The tag of the post
-    #
-    # @return [Boolean]
-    #
+    # @return [false] whether user is logged in
+    # @return [true] user is logged in
     def alter(params, session)
         if session[:user_id] == nil
             return false

@@ -23,10 +23,16 @@ get('/register') do
     slim(:register)
 end
 
-# Creates account and redirects to starting page, sends error message if incorrect input
+# Attempts to create a new user and redirects to starting page
 #
-# @param [String] username, The username
-# @param [String] password, The password
+# @param [Hash] params, form data
+# @option params [String] username, The username
+# @option params [String] password, The password
+#
+# @return [Hash]
+#   * :error [String] whether an error ocurred
+# @return [Hash]
+#   * :success [String] message sent if register was successful
 #
 # @see Model#create_account
 post('/create_account') do
@@ -133,15 +139,14 @@ end
 # Attempts to insert a new row into the posts table
 #
 # @param [Hash] params, form data
-# 
+#
+# @option params [Blob] image, the image submitted
+#
+# @option params [String] content, The text in the blog
+# @option params [String] tag, The tag of the post
+#
 # @return [Hash]
 #   * :error [String] whether an error ocurred
-#
-# @option param [Blob] image, the image submitted
-#
-# @option param [String] content, The text in the blog
-# @option param [String] tag, The tag of the post
-#
 # @return [Hash]
 #   * :success [String] message sent if post was successful
 #
@@ -188,8 +193,8 @@ end
 #
 # @option param [Blob] image, the image submitted
 #
-# @option param [String] content, The text in the blog
-# @option param [String] tag, The tag of the post
+# @option params [String] content, The text in the blog
+# @option params [String] tag, The tag of the post
 #
 # @see Model#alter
 post('/alter/:id') do
