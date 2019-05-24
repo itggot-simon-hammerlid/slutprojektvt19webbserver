@@ -19,14 +19,14 @@ module Model
         pass = db.execute("SELECT id, password FROM users WHERE username = ?",params["Username"])
         
         if pass.length == 0
-            return {error: "failed"}
+            return {error: "Incorrect username"}
         end
         
         if BCrypt::Password.new(pass[0]["password"]) == params["Password"]
 
             return {id: pass[0]['id'], success: "Logged in"}
         else
-            return {error: "failed"}
+            return {error: "Incorrect password"}
         end
     end
 
@@ -141,7 +141,7 @@ module Model
         end
     end
 
-    #
+=begin    #
     #
     # @return [Boolean]
     #
@@ -159,5 +159,6 @@ module Model
             return false
         end
     end
-end
+=end 
+end 
 

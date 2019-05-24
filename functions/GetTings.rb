@@ -78,7 +78,7 @@ def mathposts()
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
-    result = db.execute("SELECT * FROM posts WHERE tagId=?", "math")   
+    result = db.execute("SELECT * FROM posts WHERE tagName=?", "math")   
     return result
 end
 
@@ -90,6 +90,6 @@ def scienceposts()
     db = SQLite3::Database.new('db/Databasse.db')
     db.results_as_hash = true
 
-    result = db.execute("SELECT * FROM posts WHERE tagId=?", "science")
+    result = db.execute("SELECT * FROM posts WHERE tagName=?", "science")
     return result
 end

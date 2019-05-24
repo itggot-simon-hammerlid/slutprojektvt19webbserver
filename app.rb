@@ -72,15 +72,18 @@ post('/login') do
         redirect('/accessed')
     else 
         session[:msg] = result[:error]
-        redirect('/error')
+        #redirect('/error')
+        redirect('/login')
     end
 end
 
+=begin
 # Display Login Page with error message
 #
 get('/error') do
     slim(:error)
 end
+
 
 
 # Redirects to login site with error message if the user tries to login with incorrect credentials
@@ -96,6 +99,7 @@ post('/error') do
         redirect('/accessed')
     end
 end
+=end
 
 # Checks if visitor is logged in and displays logged in page
 # 
