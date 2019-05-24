@@ -120,7 +120,9 @@ get('/accessed') do
     end
 end
 
-# Display Profile Page
+# Retrieves and displays all users
+#
+# @return [Array] containing the data of all users
 #
 # @see Model#profile
 get('/profile') do
@@ -155,7 +157,9 @@ post('/post') do
     end
 end
 
-# Display posts of all users
+# Retrieves and displays all posts
+#
+# @return [Array] containing the data of all posts
 #
 # @see GetTings#getposts
 get('/posts') do
@@ -163,11 +167,14 @@ get('/posts') do
     slim(:posts, locals:{users_posts: result})
 end
 
-# Display posts of user chosen
+# Retrieves and displays posts of user chosen
 #
 # @param [Hash] params, form data
 #
 # @option params [Integer] id, The user_id of the chosen account
+#
+# @return [Array] containing the data of all posts from a specific user
+# @return [Array] containing the username from a specific user
 #
 # @see Model#getpostsbyuserid
 get('/posts/:id') do
@@ -206,7 +213,9 @@ post('/logout') do
     redirect('/')
 end
 
-# Display list of tags
+# Retrieves and displays all tag names
+#
+# @return [Array] containing the data of all tag names
 #
 # @see Model#tag_list
 get('/tag_list') do
@@ -214,7 +223,9 @@ get('/tag_list') do
     slim(:tag_list, locals:{topics: result})
 end
 
-# Display posts with the science tag
+# Retrieves and displays all posts with the science tag
+#
+# @return [Array] containing the data of all posts for posts with science tag
 #
 # @see Model#scienceposts
 get('/tags/science') do
@@ -222,7 +233,9 @@ get('/tags/science') do
     slim(:sciencetag, locals:{content: result})
 end
 
-# Display posts with the math tag
+# Retrieves and displays all posts with the math tag
+#
+# @return [Array] containing the data of all posts for posts with math tag
 #
 # @see Model#mathposts
 get('/tags/math') do
