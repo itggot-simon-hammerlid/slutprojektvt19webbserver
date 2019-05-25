@@ -83,30 +83,6 @@ post('/login') do
     end
 end
 
-=begin
-# Display Login Page with error message
-#
-get('/error') do
-    slim(:error)
-end
-
-
-
-# Redirects to login site with error message if the user tries to login with incorrect credentials
-#
-# @param [String] username, The username
-# @param [String] password, The password
-#
-# @see Model#error
-post('/error') do
-    if error(params)
-        redirect('/error')
-    else
-        redirect('/accessed')
-    end
-end
-=end
-
 # Checks if visitor is logged in and displays logged in page
 # 
 # @return [Hash]
@@ -178,8 +154,7 @@ end
 #
 # @option params [Integer] id, The user_id of the chosen account
 #
-# @return [Array] containing the data of all posts from a specific user
-# @return [Array] containing the username from a specific user
+# @return [Array] containing all the user's posts and username
 #
 # @see Model#getpostsbyuserid
 get('/posts/:id') do
@@ -191,10 +166,13 @@ end
 #
 # @param [Hash] params, form data
 #
-# @option param [Hash] image, the image submitted
+# @option params [Hash] image, the image submitted
 #
 # @option params [String] content, The text in the blog
 # @option params [String] tag, The tag of the post
+#
+# @return [Boolean] user is not logged in
+# @return [Boolean] user is logged in
 #
 # @see Model#alter
 post('/alter/:id') do

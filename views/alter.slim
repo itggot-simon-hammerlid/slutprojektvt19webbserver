@@ -1,5 +1,6 @@
 main   
-
+    - if session[:msg]
+        p = session[:msg]
     form action="/alter/:id" method="POST" id="formula" enctype="multipart/form-data"
         / input name="Title" type="text" placeholder="Title" 
         input name="Text" type="text" placeholder="Text"

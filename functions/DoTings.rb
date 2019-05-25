@@ -61,10 +61,10 @@ module Model
     #
     # @param [Hash] params, form data
     # 
-    # @option param [Hash] image, the image submitted
+    # @option params [Hash] image, the image submitted
     #
-    # @option param [String] content, The text in the blog
-    # @option param [String] tag, The tag of the post
+    # @option params [String] content, The text in the blog
+    # @option params [String] tag, The tag of the post
     #
     # @return [Hash]
     #   * :error [String] whether an error ocurred
@@ -102,17 +102,18 @@ module Model
     #
     # @param [Hash] params, form data
     #
-    # @option param [Hash] image, the image submitted
+    # @option params [Hash] image, the image submitted
     #
-    # @option param [String] content, The text in the blog
-    # @option param [String] tag, The tag of the post
+    # @option params [String] content, The text in the blog
+    # @option params [String] tag, The tag of the post
     #
-    # @return [Boolean]
-    # @return [Boolean]
+    # @return [Boolean] user is not logged in
+    # @return [Boolean] user is logged in
     #
     def alter(params, session)
         if session[:user_id] == nil
-            return false
+            #return false
+            return {error: "Not logged in"}
         else
             db = SQLite3::Database.new('db/Databasse.db')
             db.results_as_hash = true
@@ -131,32 +132,12 @@ module Model
                     new_file_name,
                     session[:user_id],
                     params["tag"]
-                    #params["id"]
                 ]
             )
             # name = db.execute("SELECT username FROM users WHERE id=?" , [session["user"]])
-            return true
+            #return true
+            return {success: "Post successful"}
         end
     end
-
-=begin    #
-    #
-    # @return [Boolean]
-    #
-    # @return [Boolean]
-    def error(params)
-        db = SQLite3::Database.new('db/Databasse.db')
-        db.results_as_hash = true
-
-        result = db.execute("SELECT * FROM users WHERE username = ? AND password = ?",params["Username"], params["Password"])
-        
-        if result == []
-            return true
-            #result.first["Password"] 
-        else 
-            return false
-        end
-    end
-=end 
 end 
 
