@@ -104,6 +104,7 @@ module Model
     #
     # @option params [Hash] image, the image submitted
     #
+    # @option params [Integer] id, the post's id
     # @option params [String] content, The text in the blog
     # @option params [String] tag, The tag of the post
     #
@@ -130,7 +131,7 @@ module Model
 
             db.execute("REPLACE INTO posts (id, content, picture, userId, tagName) VALUES (?, ?, ?, ?, ?)",
                 [
-                    params["id"],
+                    params["id"].to_i,
                     params["Text"],
                     new_file_name,
                     session[:user_id],

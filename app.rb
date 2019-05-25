@@ -130,6 +130,7 @@ end
 #
 # @param [Hash] image, the image submitted
 #
+# @param [Integer] id, the post's id
 # @param [String] content, The text in the blog
 # @param [String] tag, The tag of the post
 #
