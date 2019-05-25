@@ -107,8 +107,10 @@ module Model
     # @option params [String] content, The text in the blog
     # @option params [String] tag, The tag of the post
     #
-    # @return [Boolean] user is not logged in
-    # @return [Boolean] user is logged in
+    # @return [Hash]
+    #   * :error [String] whether an error ocurred
+    # @return [Hash]
+    #   * :success [String] message sent if post was successful
     #
     def alter(params, session)
         if session[:user_id] == nil

@@ -8,7 +8,7 @@ div class="postor"
             img src="/img/#{post['picture']}"
             -if session["user_id"] != nil
                 a href="/alter/#{post['id']}"
-            form action="/alter/:id" method="POST"
+            form action="/alter/:id" method="POST" id="formula" enctype="multipart/form-data"
                 / input name="Title" type="text" placeholder="Title" 
                 input name="Text" type="text" placeholder="Text"
                 input type="file" name="image" accept="image/*" id="image"
