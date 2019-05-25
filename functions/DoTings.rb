@@ -136,7 +136,7 @@ module Model
             )
             # name = db.execute("SELECT username FROM users WHERE id=?" , [session["user"]])
             #return true
-            return {success: "Post successful"}
+            return {success: "Alter successful"}
         end
     end
 end 

@@ -25,14 +25,8 @@ end
 
 # Attempts to create a new user and redirects to starting page
 #
-# @param [Hash] params, form data
-# @option params [String] username, The username
-# @option params [String] password, The password
-#
-# @return [Hash]
-#   * :error [String] whether an error ocurred
-# @return [Hash]
-#   * :success [String] message sent if register was successful
+# @param [String] username, The username
+# @param [String] password, The password
 #
 # @see Model#create_account
 post('/create_account') do
@@ -57,17 +51,8 @@ end
 
 # Finds an article
 #
-# @param [Hash] params, form data
-# @option params [String] username, The username
-# @option params [String] password, The password
-#
-# @return [Hash]
-#   * :error [String] whether an error ocurred
-# @return [Hash]
-#   * :id [Integer] The ID of the user 
-#   * :success [String] message displayed if login was successful
-# @return [Hash]
-#   * :error [String] whether an error ocurred
+# @param [String] username, The username
+# @param [String] password, The password
 #
 # @see Model#login
 post('/login') do
@@ -84,12 +69,6 @@ post('/login') do
 end
 
 # Checks if visitor is logged in and displays logged in page
-# 
-# @return [Hash]
-#   * :error [String] if user is not logged in
-#
-# @return [Hash]
-#   * :success [String] if user is logged in
 #
 get('/accessed') do
     result = accessed()
@@ -104,8 +83,6 @@ end
 
 # Retrieves and displays all users
 #
-# @return [Array] containing the data of all users
-#
 # @see Model#profile
 get('/profile') do
     users = profile()
@@ -114,17 +91,10 @@ end
 
 # Attempts to insert a new row into the posts table
 #
-# @param [Hash] params, form data
+# @param [Hash] image, the image submitted
 #
-# @option params [Hash] image, the image submitted
-#
-# @option params [String] content, The text in the blog
-# @option params [String] tag, The tag of the post
-#
-# @return [Hash]
-#   * :error [String] whether an error ocurred
-# @return [Hash]
-#   * :success [String] message sent if post was successful
+# @param [String] content, The text in the blog
+# @param [String] tag, The tag of the post
 #
 # @see Model#post
 post('/post') do
@@ -140,8 +110,6 @@ end
 
 # Retrieves and displays all posts
 #
-# @return [Array] containing the data of all posts
-#
 # @see GetTings#getposts
 get('/posts') do
     result = getposts()
@@ -150,11 +118,7 @@ end
 
 # Retrieves and displays posts of user chosen
 #
-# @param [Hash] params, form data
-#
-# @option params [Integer] id, The user_id of the chosen account
-#
-# @return [Array] containing all the user's posts and username
+# @param [Integer] id, The user_id of the chosen account
 #
 # @see Model#getpostsbyuserid
 get('/posts/:id') do
@@ -164,22 +128,20 @@ end
 
 # Attempts to replace a row in the posts table
 #
-# @param [Hash] params, form data
+# @param [Hash] image, the image submitted
 #
-# @option params [Hash] image, the image submitted
-#
-# @option params [String] content, The text in the blog
-# @option params [String] tag, The tag of the post
-#
-# @return [Boolean] user is not logged in
-# @return [Boolean] user is logged in
+# @param [String] content, The text in the blog
+# @param [String] tag, The tag of the post
 #
 # @see Model#alter
 post('/alter/:id') do
-    if alter(params, session)
-        redirect('/profile')
-    else
+    result = alter(params, session)
+    if result[:error] 
+        session[:msg] = result[:error]
         redirect('/login')
+    else
+        session[:msg] = result[:success]
+        redirect('/profile')
     end
 end
 
@@ -198,8 +160,6 @@ end
 
 # Retrieves and displays all tag names
 #
-# @return [Array] containing the data of all tag names
-#
 # @see Model#tag_list
 get('/tag_list') do
     result = tag_list()
@@ -208,8 +168,6 @@ end
 
 # Retrieves and displays all posts with the science tag
 #
-# @return [Array] containing the data of all posts for posts with science tag
-#
 # @see Model#scienceposts
 get('/tags/science') do
     result = scienceposts()
@@ -217,8 +175,6 @@ get('/tags/science') do
 end
 
 # Retrieves and displays all posts with the math tag
-#
-# @return [Array] containing the data of all posts for posts with math tag
 #
 # @see Model#mathposts
 get('/tags/math') do
