@@ -128,8 +128,9 @@ module Model
 
             new_file = FileUtils.copy(path, "./public/img/#{new_file_name}")
 
-            db.execute("REPLACE INTO posts (content, picture, userId, tagName) VALUES (?, ?, ?, ?)",
+            db.execute("REPLACE INTO posts (id, content, picture, userId, tagName) VALUES (?, ?, ?, ?, ?)",
                 [
+                    params["id"],
                     params["Text"],
                     new_file_name,
                     session[:user_id],
