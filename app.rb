@@ -140,7 +140,7 @@ end
 #
 # @param [Hash] params, form data
 #
-# @option params [Blob] image, the image submitted
+# @option params [Hash] image, the image submitted
 #
 # @option params [String] content, The text in the blog
 # @option params [String] tag, The tag of the post
@@ -191,7 +191,7 @@ end
 #
 # @param [Hash] params, form data
 #
-# @option param [Blob] image, the image submitted
+# @option param [Hash] image, the image submitted
 #
 # @option params [String] content, The text in the blog
 # @option params [String] tag, The tag of the post

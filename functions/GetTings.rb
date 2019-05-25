@@ -32,8 +32,7 @@ end
 #
 # @option params [Integer] id, The user_id of the chosen account
 #
-# @return [Array] containing the data of all posts from a specific user
-# @return [Array] containing the username from a specific user
+# @return [Array] containing all the user's posts and username
 #
 def getpostsbyuserid(params)
     db = SQLite3::Database.new('db/Databasse.db')
