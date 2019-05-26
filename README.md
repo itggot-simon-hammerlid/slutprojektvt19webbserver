@@ -16,7 +16,7 @@ Följande sidor är planerade att vara med:
 8. De enskilda tag sidorna.
 ## 3. Funktionalitet (med sekvensdiagram)
 #### 1. Logga in
-![pic](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/Sekvensdiagram/loginsequence.png)
+![pic](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/Sekvensdiagram/page%20request%20sequence.png)
 #### 2. Logga ut
 ![pic](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/Sekvensdiagram/loggingout.png)
 #### 3. Registera sig
