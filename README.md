@@ -20,7 +20,7 @@ Följande sidor är planerade att vara med:
 #### 2. Logga ut
 ![alttext](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/resources/loggingout.PNG)
 #### 3. Registera sig
-![alttext](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/resources/registration_sequence.PNG)
+![pic](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/resources/registration_sequence.PNG)
 #### 4. Lägga upp bilder och text till olika ämnen/taggar
 ![alttext](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/resources/registration_sequence.PNG)
 #### 5. Se inlägg via tagg/ämne, person samt alla inlägg samtidigt.
