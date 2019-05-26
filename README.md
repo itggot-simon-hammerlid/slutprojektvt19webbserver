@@ -10,10 +10,10 @@ Följande sidor är planerade att vara med:
 2. En login-sida
 3. En registreringssida
 4. En sida med alla profiler
-5. Olika personers personliga profil sidor.
+5. Olika personers personliga profil sidor(visar deras inlägg).
 6. En allmän sida med inlägg.
 7. En sida med taggar.
-8. De enskilda tag sidorna.
+8. De enskilda tag sidorna(visar bilder med vald tag).
 ## 3. Funktionalitet (med sekvensdiagram)
 #### 1. Logga in
 ![pic](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/Sekvensdiagram/loginsquence.PNG)
