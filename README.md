@@ -29,6 +29,7 @@ Följande sidor är planerade att vara med:
 ![pic](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/Sekvensdiagram/altersequence.PNG)
 ## 4. Arkitektur (Beskriv filer och mappar)
 Jag har en mapp som heter views, som innehåller alla slim filer. Public innehåller min css samt mina bilder. En db fil som innehåller min databas. Jag har en fil som heter functions som innehåller olika ruby filer som innehåller funktioner. I functions filen har jag två stycken ruby filer, en som innehåller alla get funktioner och en som innehåller alla post funktioner. Utöver dessa två ruby filer har jag en app.rb som ligger i slutprojektvt19webbserver filen. app.rb är min controller, medan de två funktions-filerna är mina module filer. Jag har en fil som innehåller mina sekvensdiagram och en annan som innehåller mitt er-diagram. Jag har också en fil för min mappstrukturs bild. Allt detta står i en readme fil i projekt filen.
+
 ![pic](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/mappstruktur/strukt.PNG)
 ## 5. (Databas med ER-diagram)
 https://www.lucidchart.com/invitations/accept/86fae7e4-3a6c-4148-ba01-0c736a9c08d7
