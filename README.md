@@ -16,10 +16,15 @@ Följande sidor är planerade att vara med:
 8. De enskilda tag sidorna.
 ## 3. Funktionalitet (med sekvensdiagram)
 #### 1. Logga in
+![alttext](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/resources/loginsequence.PNG)
 #### 2. Logga ut
+![alttext](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/resources/loggingout.PNG)
 #### 3. Registera sig
+![alttext](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/resources/registration_sequence.PNG)
 #### 4. Lägga upp bilder och text till olika ämnen/taggar
+![alttext](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/resources/registration_sequence.PNG)
 #### 5. Se inlägg via tagg/ämne, person samt alla inlägg samtidigt.
+![alttext](https://github.com/itggot-simon-hammerlid/slutprojektvt19webbserver/blob/master/resources/page_request_sequence.PNG)
 ## 4. Arkitektur (Beskriv filer och mappar)
 Jag har en mapp som heter views, som innehåller alla slim filer. Public innehåller min css samt mina bilder. En db fil som innehåller min databas. Jag har en fil som heter functions som innehåller olika ruby filer som innehåller funktioner. I functions filen har jag två stycken ruby filer, en som innehåller alla get funktioner och en som innehåller alla post funktioner. Utöver dessa två ruby filer har jag en app.rb som ligger i slutprojektvt19webbserver filen.
 ## 5. (Databas med ER-diagram)
