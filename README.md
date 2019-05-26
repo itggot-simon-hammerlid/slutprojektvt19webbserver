@@ -23,6 +23,6 @@ Följande sidor är planerade att vara med:
 #### 6. Lägga upp bilder och text till olika ämnen/taggar
 #### 7. Se inlägg via tagg/ämne, person samt alla inlägg samtidigt.
 ## 4. Arkitektur (Beskriv filer och mappar)
-Jag har en mapp som heter views, som innehåller alla slim filer. Public innehåller min css samt mina bilder. En db fil som innehåller min databas. Jag har en fil som heter functions som innehåller olika ruby filer som innehåller funktioner. Jag har två stycken ruby filer, en som innehåller alla get funktioner och en som innehåller alla post funktioner.
+Jag har en mapp som heter views, som innehåller alla slim filer. Public innehåller min css samt mina bilder. En db fil som innehåller min databas. Jag har en fil som heter functions som innehåller olika ruby filer som innehåller funktioner. I functions filen har jag två stycken ruby filer, en som innehåller alla get funktioner och en som innehåller alla post funktioner. Utöver dessa två ruby filer har jag en app.rb som ligger i slutprojektvt19webbserver filen.
 ## 5. (Databas med ER-diagram)
 https://www.lucidchart.com/invitations/accept/86fae7e4-3a6c-4148-ba01-0c736a9c08d7
