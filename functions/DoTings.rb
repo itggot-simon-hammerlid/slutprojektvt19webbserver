@@ -84,8 +84,6 @@ module Model
 
             new_file = FileUtils.copy(path, "./public/img/#{new_file_name}")
 
-            #tag = db.execute("SELECT id FROM tags WHERE name=?",[params['text']])[0]
-
             db.execute("INSERT INTO posts (content, picture, userId, tagName) VALUES (?, ?, ?, ?)",
                 [
                     params["Text"],
@@ -115,7 +113,6 @@ module Model
     #
     def alter(params, session)
         if session[:user_id] == nil
-            #return false
             return {error: "Not logged in"}
         else
             db = SQLite3::Database.new('db/Databasse.db')
@@ -124,8 +121,6 @@ module Model
             new_file_name = SecureRandom.uuid #en random sträng, x lång, 
             temp_file = params["image"]["tempfile"]
             path = File.path(temp_file)
-
-            #tag = db.execute("SELECT id FROM tags WHERE name=?",[params['text']])[0]
 
             new_file = FileUtils.copy(path, "./public/img/#{new_file_name}")
 
@@ -138,8 +133,6 @@ module Model
                     params["tag"]
                 ]
             )
-            # name = db.execute("SELECT username FROM users WHERE id=?" , [session["user"]])
-            #return true
             return {success: "Alter successful"}
         end
     end

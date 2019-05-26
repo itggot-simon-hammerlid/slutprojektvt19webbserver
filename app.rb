@@ -63,7 +63,6 @@ post('/login') do
         redirect('/accessed')
     else 
         session[:msg] = result[:error]
-        #redirect('/error')
         redirect('/login')
     end
 end
@@ -145,11 +144,6 @@ post('/alter/:id') do
         redirect('/profile')
     end
 end
-
-# post('/alter') do
-#     redirect(back)
-# end
-
 
 # Logs out of account and redirects to starting page
 #
