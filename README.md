@@ -3,7 +3,7 @@
 # Projektplan
 
 ## 1. Projektbeskrivning
-#### Ett forum var man skall kunna skapa konto, logga in och skapa inlägg samt logga ut. Inläggen skall tillhöra vissa taggar/ämnen. Man skall kunna redigera sina inlägg. Användare ska kunna kolla andras profiler och kunna se deras inlägg. Användare skall kunna se inlägg till enskilda taggar/ämnen.
+#### Ett forum var man skall kunna skapa konto, logga in och skapa inlägg samt logga ut. Inläggen skall tillhöra vissa taggar/ämnen. Man skall kunna redigera sina inlägg. Användare ska kunna kolla vilka andra användare finns och kunna se deras inlägg. Användare skall kunna se inlägg till enskilda taggar/ämnen. Skall också gå att se alla inlägg samtidigt.
 ## 2. Vyer (sidor)
 Följande sidor är planerade att vara med:
 1. En Mainpage
